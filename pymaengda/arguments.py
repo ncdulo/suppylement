@@ -10,6 +10,8 @@ class Arguments():
         print('parse_args')
         self.parser.add_argument(
                 '-r', '--runlevel',
+                default=1,
+                choices=[0,1,2,3,4,8],
                 type=int,
                 help='runlevel to start in',
                 dest='runlevel')
