@@ -25,17 +25,47 @@ class Application():
         self.arguments = arguments.Arguments()
         self.args = self.arguments.parse_args()
 
-    def run(self):
-        data = self.reader.read_data('../data/test.csv')
+
+    def display(self, data):
         i = 1
         for row in data:
             print(f"-------- {i}")
             print(f"{row['amount']}g of {row['strain']}")
             print(f"on {row['date']}")
+        print(f'Total rows: {len(data)}')
 
-        runlevel = 5
+
+    def run(self):
+        data = self.reader.read_data('../data/test.csv')
+
+        runlevel = 1
         while runlevel > 0:
-            print('Running application')
+            '''Main program logic loop. Parse the values given on the command
+            line and execute the desired functions. In many cases, this will
+            only loop once. Certain cases such as updating a row will result
+            in the loop repeating to display the updated row.
+
+            Runlevels:
+              0 - quit
+              1 - display
+              2 - edit
+              3 - create
+              4 - delete
+              8 - statistics'''
+            if runlevel == 0:
+                print('quit')
+                break
+            elif runlevel == 1:
+                print('display')
+                self.display(data)
+            elif runlevel == 2:
+                print('edit')
+            elif runlevel == 3:
+                print('create')
+            elif runlevel == 4:
+                print('delete')
+            elif runlevel == 8:
+                print('statistics')
             #choice = input('Press x<Ret> to quit\n> ').lower()
             #if choice == 'x':
             #    runlevel = 0
