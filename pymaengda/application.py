@@ -62,16 +62,19 @@ class Application():
             elif runlevel == 1:
                 print('display')
                 self.display(data)
+                runlevel = 0
             elif runlevel == 2:
                 print('edit')
+                runlevel = 1
             elif runlevel == 3:
                 print('create')
+                runlevel = 1
             elif runlevel == 4:
                 print('delete')
+                runlevel = 1
             elif runlevel == 8:
                 print('statistics')
-            #choice = input('Press x<Ret> to quit\n> ').lower()
-            #if choice == 'x':
-            #    runlevel = 0
-            #runlevel -= 1
-            runlevel = 0
+                runlevel = 1
+            else:
+                print('Unknown runlevel')
+                runlevel = 0
