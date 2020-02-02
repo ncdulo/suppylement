@@ -1,6 +1,8 @@
 import arguments
 import data_reader
 
+import os
+
 
 ''' Basic program structure
 Parse command line arguments. Maybe config file?
@@ -36,7 +38,9 @@ class Application():
 
 
     def run(self):
-        data = self.reader.read_data('../data/test.csv')
+        data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
+        data_file = '/test.csv'
+        data = self.reader.read_data(data_dir + data_file)
 
         runlevel = 1
         while runlevel > 0:
