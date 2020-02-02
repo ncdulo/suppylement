@@ -1,5 +1,5 @@
 import arguments
-import data_reader
+import data
 
 import os
 
@@ -23,21 +23,14 @@ class Application():
         the best course of action. We do not read any data here as some
         argument combinations will not require any to be read (help, version
         information). '''
-        self.reader = data_reader.Data_Reader()
+        self.reader = data.Data()
         self.arguments = arguments.Arguments()
         self.args = self.arguments.parse_args()
 
 
     def display(self, data):
         print('Displaying all records...')
-        i = 1
-        for row in data:
-            print(f"Record #{i}")
-            print(f"{row['amount']}g of {row['strain']}")
-            print(f"on {row['date']}")
-            print(' ---')
-            i += 1
-        print(f'Total rows: {len(data)}')
+        print(data)
 
 
     def run(self):
