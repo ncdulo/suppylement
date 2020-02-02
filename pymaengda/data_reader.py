@@ -13,6 +13,7 @@ class Data_Reader():
     def read_data(self, infile):
         if self._data is None:
             with open(infile) as csvfile:
+                print(f"Reading data from '{infile}'")
                 reader = csv.DictReader(csvfile)
                 data = list(reader)
         return data
