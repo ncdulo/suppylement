@@ -1,4 +1,4 @@
-date,amount,strain
-Apr 2 1988,4.2,Super Green
-Jul 4 2004,3.75,Red Horn
-Jan 31 2020,5.25,Super Green #69
+date,time,amount,strain
+2019-12-31,19:34:02,4.2,Super Green
+2020-01-14,04:22:51,3.75,Red Horn
+2020-01-25,11:08:19,5.25,Super Green #69
