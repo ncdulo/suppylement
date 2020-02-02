@@ -42,7 +42,11 @@ class Application():
         data_file = '/test.csv'
         data = self.reader.read_data(data_dir + data_file)
 
-        runlevel = 1
+        if self.args.runlevel is not None:
+            runlevel = self.args.runlevel
+        else:
+            runlevel = 1
+
         while runlevel > 0:
             '''Main program logic loop. Parse the values given on the command
             line and execute the desired functions. In many cases, this will
