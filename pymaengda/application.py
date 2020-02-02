@@ -29,11 +29,14 @@ class Application():
 
 
     def display(self, data):
+        print('Displaying all records...')
         i = 1
         for row in data:
-            print(f"-------- {i}")
+            print(f"Record #{i}")
             print(f"{row['amount']}g of {row['strain']}")
             print(f"on {row['date']}")
+            print(' ---')
+            i += 1
         print(f'Total rows: {len(data)}')
 
 
@@ -64,7 +67,6 @@ class Application():
                 print('quit')
                 break
             elif runlevel == 1:
-                print('display')
                 self.display(data)
                 runlevel = 0
             elif runlevel == 2:
