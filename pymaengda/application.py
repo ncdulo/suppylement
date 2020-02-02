@@ -1,3 +1,4 @@
+import arguments
 import data_reader
 
 
@@ -21,7 +22,8 @@ class Application():
         argument combinations will not require any to be read (help, version
         information). '''
         self.reader = data_reader.Data_Reader()
-
+        self.arguments = arguments.Arguments()
+        self.args = self.arguments.parse_args()
 
     def run(self):
         data = self.reader.read_data('../data/test.csv')
@@ -34,8 +36,8 @@ class Application():
         runlevel = 5
         while runlevel > 0:
             print('Running application')
-            choice = input('Press x<Ret> to quit\n> ').lower()
-            if choice == 'x':
-                runlevel = 0
-
-            runlevel -= 1
+            #choice = input('Press x<Ret> to quit\n> ').lower()
+            #if choice == 'x':
+            #    runlevel = 0
+            #runlevel -= 1
+            runlevel = 0
