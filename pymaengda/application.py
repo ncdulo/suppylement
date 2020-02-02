@@ -24,7 +24,13 @@ class Application():
 
 
     def run(self):
-        self.reader.read_data('../data/test.csv')
+        data = self.reader.read_data('../data/test.csv')
+        i = 1
+        for row in data:
+            print(f"-------- {i}")
+            print(f"{row['amount']}g of {row['strain']}")
+            print(f"on {row['date']}")
+
         runlevel = 5
         while runlevel > 0:
             print('Running application')
