@@ -39,7 +39,8 @@ class Application():
         reused. Might it be best in the Data class though?'''
         data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
         data_file = '/test.csv'
-        data = self.reader.read_data(data_dir + data_file)
+        data = self.reader.read_data(data_dir + data_file,
+                index_col=0)
 
         # Test command. Yes, it works.
         write = self.reader.write_data(data_dir + data_file + '.out', data)
