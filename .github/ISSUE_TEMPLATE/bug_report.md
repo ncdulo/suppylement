@@ -26,8 +26,9 @@ If applicable, add terminal output or screenshots to help explain your problem.
 **Desktop (please complete the following information):**
  - OS/Distribution: [e.g. Gentoo Linux, MacOS X 10, Windows 10]
  - Python Version [e.g. 3.6.9]
- - Pandas Version
- - Numpy Version
+ - Pandas Version [e.g. 1.0.0]
+ - Numpy Version [e.g. 1.18.1]
+ - Python virtual environment?
 
 **Additional context**
 Add any other context about the problem here.
