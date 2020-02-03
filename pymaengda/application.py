@@ -34,9 +34,17 @@ class Application():
 
 
     def run(self):
+        '''I think a lot of the below block, regarding custom read arguments
+        and such may be better off in it's own function. I can see it being
+        reused. Might it be best in the Data class though?'''
         data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
         data_file = '/test.csv'
-        data = self.reader.read_data(data_dir + data_file)
+        data = self.reader.read_data(data_dir + data_file,
+                index_col=0,
+                parse_dates= {'burned at': [0, 1]})
+
+        # Test command. Yes, it works.
+        #write = self.reader.write_data(data_dir + data_file + '.out', data)
 
         if self.args.runlevel is not None:
             runlevel = self.args.runlevel
