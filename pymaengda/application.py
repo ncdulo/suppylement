@@ -23,27 +23,55 @@ class Application():
         the best course of action. We do not read any data here as some
         argument combinations will not require any to be read (help, version
         information). '''
+        self.data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
+        self.data_file = '/test.csv'
         self.reader = data.Data()
         self.arguments = arguments.Arguments()
         self.args = self.arguments.parse_args()
 
 
-    def display(self, data):
+    def display(self):
+        '''Parse arguments for specifiers such as limit, order, etc
+        Read data from disk
+        Format data, if necessary
+        Display data'''
+        data = self.reader.read_data(self.data_dir + self.data_file,
+                index_col=0)
         print('Displaying all records...')
         print(data)
+
+
+    def edit(self):
+        '''This would make sense to combine delete then create to simplify
+        the function. Need to think through how we call these functions.'''
+        data = self.reader.read_data(self.data_dir + self.data_file,
+                index_col=0)
+        write = self.reader.write_data(self.data_dir + self.data_file + '.out', data)
+
+
+    def create(self):
+        '''Parse arguments for data to be written (e.g. strain, amount)
+        Determine missing data -- timestamp
+        Create row to be appended
+        Append row to data file on disk'''
+        data = self.reader.read_data(self.data_dir + self.data_file,
+                index_col=0)
+        write = self.reader.write_data(self.data_dir + self.data_file + '.out', data,
+                mode='w')
+        # NOTE: In above, change mode='a' for proper operation
+
+
+    def delete(self):
+        pass
 
 
     def run(self):
         '''I think a lot of the below block, regarding custom read arguments
         and such may be better off in it's own function. I can see it being
         reused. Might it be best in the Data class though?'''
-        data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
-        data_file = '/test.csv'
-        data = self.reader.read_data(data_dir + data_file,
-                index_col=0)
 
         # Test command. Yes, it works.
-        write = self.reader.write_data(data_dir + data_file + '.out', data)
+        #write = self.reader.write_data(data_dir + data_file + '.out', data)
 
         if self.args.runlevel is not None:
             runlevel = self.args.runlevel
@@ -67,16 +95,16 @@ class Application():
                 print('quit')
                 break
             elif runlevel == 1:
-                self.display(data)
+                self.display()
                 runlevel = 0
             elif runlevel == 2:
-                print('edit')
+                self.edit()
                 runlevel = 1
             elif runlevel == 3:
-                print('create')
+                self.create()
                 runlevel = 1
             elif runlevel == 4:
-                print('delete')
+                self.delete()
                 runlevel = 1
             elif runlevel == 8:
                 print('statistics')
