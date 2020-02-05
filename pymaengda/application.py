@@ -24,21 +24,22 @@ class Application():
         argument combinations will not require any to be read (help, version
         information). '''
         self.data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
-        self.data_file = '/test.csv'
+        self.data_csv = '/test.csv'
+        self.data_file = self.data_dir + self.data_csv
         self.reader = data.Data()
         self.arguments = arguments.Arguments()
         self.args = self.arguments.parse_args()
 
 
-    def read_data(self, *args, **kwargs):
-        data = self.reader.read_data(self.data_dir + self.data_file, *args,
+    def read_data(self, infile, *args, **kwargs):
+        data = self.reader.read_data(infile, *args,
                 index_col=0, **kwargs)
 
         return data
 
 
-    def write_data(self, data, *args, **kwargs):
-        return self.reader.write_data(self.data_dir + self.data_file + '.out',
+    def write_data(self, outfile, data, *args, **kwargs):
+        return self.reader.write_data(outfile + '.out',
                 data, *args, **kwargs)
 
 
@@ -47,7 +48,7 @@ class Application():
         Read data from disk
         Format data, if necessary
         Display data'''
-        data = self.read_data()
+        data = self.read_data(self.data_file)
 
         print('Displaying all records...')
         print(data)
@@ -56,8 +57,8 @@ class Application():
     def edit(self):
         '''This would make sense to combine delete then create to simplify
         the function. Need to think through how we call these functions.'''
-        data = self.read_data()
-        write = self.write_data(data)
+        data = self.read_data(self.data_file)
+        write = self.write_data(self.data_file, data)
 
 
     def create(self):
@@ -65,10 +66,8 @@ class Application():
         Determine missing data -- timestamp
         Create row to be appended
         Append row to data file on disk'''
-        data = self.read_data()
-        write = self.reader.write_data(self.data_dir + self.data_file + '.out', data,
-                mode='w')
-        #write = self.write_data(data)
+        data = self.read_data(self.data_file)
+        write = self.write_data(self.data_file, data, mode='w')
         # NOTE: In above, change mode='a' for proper operation
 
 
