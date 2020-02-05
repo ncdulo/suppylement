@@ -30,13 +30,25 @@ class Application():
         self.args = self.arguments.parse_args()
 
 
+    def read_data(self, *args, **kwargs):
+        data = self.reader.read_data(self.data_dir + self.data_file, *args,
+                index_col=0, **kwargs)
+
+        return data
+
+
+    def write_data(self, data, *args, **kwargs):
+        return self.reader.write_data(self.data_dir + self.data_file + '.out',
+                data, *args, **kwargs)
+
+
     def display(self):
         '''Parse arguments for specifiers such as limit, order, etc
         Read data from disk
         Format data, if necessary
         Display data'''
-        data = self.reader.read_data(self.data_dir + self.data_file,
-                index_col=0)
+        data = self.read_data()
+
         print('Displaying all records...')
         print(data)
 
@@ -44,9 +56,8 @@ class Application():
     def edit(self):
         '''This would make sense to combine delete then create to simplify
         the function. Need to think through how we call these functions.'''
-        data = self.reader.read_data(self.data_dir + self.data_file,
-                index_col=0)
-        write = self.reader.write_data(self.data_dir + self.data_file + '.out', data)
+        data = self.read_data()
+        write = self.write_data(data)
 
 
     def create(self):
@@ -54,10 +65,10 @@ class Application():
         Determine missing data -- timestamp
         Create row to be appended
         Append row to data file on disk'''
-        data = self.reader.read_data(self.data_dir + self.data_file,
-                index_col=0)
+        data = self.read_data()
         write = self.reader.write_data(self.data_dir + self.data_file + '.out', data,
                 mode='w')
+        #write = self.write_data(data)
         # NOTE: In above, change mode='a' for proper operation
 
 
