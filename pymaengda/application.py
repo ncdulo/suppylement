@@ -49,7 +49,7 @@ class Application():
         '''This would make sense to combine delete then create to simplify
         the function. Need to think through how we call these functions.'''
         data = self.reader.read_data(self.data_file, **self.default_read_args)
-        write = self.reader.write_data(self.data_file + '.out', data)
+        self.reader.write_data(self.data_file + '.out')
 
 
     def create(self):
@@ -58,7 +58,7 @@ class Application():
         Create row to be appended
         Append row to data file on disk'''
         data = self.reader.read_data(self.data_file, **self.default_read_args)
-        write = self.reader.write_data(self.data_file + '.out', data, mode='w')
+        self.reader.write_data(self.data_file + '.out', mode='w')
         # NOTE: In above, change mode='a' for proper operation
 
 
