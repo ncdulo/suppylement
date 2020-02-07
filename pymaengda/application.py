@@ -26,6 +26,7 @@ class Application():
         data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
         data_csv = '/test.csv'
         data_file = data_dir + data_csv
+
         self.reader = data.Data(data_file, data_file + '.out')
         self.arguments = arguments.Arguments()
         self.args = self.arguments.parse_args()
