@@ -33,6 +33,14 @@ class Arguments():
         #        type=str,
         #        help='strain name',
         #        dest='strain')
+        self.list_parser = self.subparsers.add_parser(
+                'list', help='list burns')
+        self.list_parser.add_argument(
+                '--most-recent',
+                dest='most_recent',
+                type=int,
+                default=5,
+                help='display MOST_RECENT burns, default 5')
         self.edit_parser = self.subparsers.add_parser(
                 'edit', help='not yet implemented')
         self.edit_parser.add_argument(
