@@ -16,13 +16,6 @@ class Arguments():
 
     def parse_args(self):
         print('parse_args')
-        self.parser.add_argument(
-                '-r', '--runlevel',
-                default=1,
-                choices=[0,1,2,3,4,8],
-                type=int,
-                help='runlevel to start in',
-                dest='runlevel')
         #self.parser.add_argument(
         #        '-a', '--amount',
         #        type=float,
@@ -80,7 +73,6 @@ class Arguments():
                 help='full output mode')
 
         self.args = self.parser.parse_args()
-        #print(f"self.args.runlevel='{self.args.runlevel}'")
         if self.args.mode == 'burn':
             print(f"self.args.amount='{self.args.amount}', self.args.strain='{self.args.strain}'")
         elif self.args.mode == 'rm':
