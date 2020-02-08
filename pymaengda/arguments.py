@@ -70,6 +70,15 @@ class Arguments():
                 default=1,
                 help='remove MOST_RECENT burns')
 
+        self.stats_parser = self.subparsers.add_parser(
+                'stats',
+                help='display various statistics')
+        self.stats_parser.add_argument(
+                '--full',
+                default=False,
+                action='store_true',
+                help='full output mode')
+
         self.args = self.parser.parse_args()
         #print(f"self.args.runlevel='{self.args.runlevel}'")
         if self.args.mode == 'burn':
