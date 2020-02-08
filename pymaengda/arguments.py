@@ -73,6 +73,8 @@ class Arguments():
                 help='full output mode')
 
         self.args = self.parser.parse_args()
+
+        '''Debug text below. Remove for release.'''
         if self.args.mode == 'burn':
             print(f"self.args.amount='{self.args.amount}', self.args.strain='{self.args.strain}'")
         elif self.args.mode == 'rm':
