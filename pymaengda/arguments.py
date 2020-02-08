@@ -16,16 +16,7 @@ class Arguments():
 
     def parse_args(self):
         print('parse_args')
-        #self.parser.add_argument(
-        #        '-a', '--amount',
-        #        type=float,
-        #        help='amount (in grams) of the burn',
-        #        dest='amount')
-        #self.parser.add_argument(
-        #        '-s', '--strain',
-        #        type=str,
-        #        help='strain name',
-        #        dest='strain')
+
         self.list_parser = self.subparsers.add_parser(
                 'list', help='list burns')
         self.list_parser.add_argument(
