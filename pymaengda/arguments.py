@@ -33,6 +33,13 @@ class Arguments():
         #        type=str,
         #        help='strain name',
         #        dest='strain')
+        self.edit_parser = self.subparsers.add_parser(
+                'edit', help='not yet implemented')
+        self.edit_parser.add_argument(
+                'id',
+                type=int,
+                help='id of entry to edit')
+
         self.burn_parser = self.subparsers.add_parser(
                 'burn', help='add a burn')
         self.burn_parser.add_argument(
