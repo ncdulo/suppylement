@@ -10,7 +10,9 @@ class Arguments():
                 https://github.com/ncdulo/pymaengda
                 '''
             )
-        self.subparsers = self.parser.add_subparsers(help='modes')
+        self.subparsers = self.parser.add_subparsers(
+                dest='mode',
+                help='modes')
 
     def parse_args(self):
         print('parse_args')
@@ -32,18 +34,32 @@ class Arguments():
         #        help='strain name',
         #        dest='strain')
         self.burn_parser = self.subparsers.add_parser(
-                'burn', help='Add a burn')
+                'burn', help='add a burn')
         self.burn_parser.add_argument(
                 'amount',
                 type=float,
-                help='Amount in grams')
+                help='amount in grams')
         self.burn_parser.add_argument(
                 'strain',
                 type=str,
-                help='Name of strain burned')
+                help='name of strain burned')
+
+        self.rm_parser = self.subparsers.add_parser(
+                'rm',
+                help='remove specific entries')
+        self.rm_parser.add_argument(
+                '--most-recent',
+                dest='most_recent',
+                type=int,
+                default=1,
+                help='remove MOST_RECENT entries')
 
         self.args = self.parser.parse_args()
-        print(f"self.args.runlevel='{self.args.runlevel}'")
-        print(f"self.args.amount='{self.args.amount}', self.args.strain='{self.args.strain}'")
+        #print(f"self.args.runlevel='{self.args.runlevel}'")
+        if self.args.mode == 'burn':
+            print(f"self.args.amount='{self.args.amount}', self.args.strain='{self.args.strain}'")
+        elif self.args.mode == 'rm':
+            print(f'self.args.most_recent = {self.args.most_recent}')
+        print(f'self.args.mode = {self.args.mode}')
 
         return self.args
