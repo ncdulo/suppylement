@@ -41,6 +41,7 @@ class Arguments():
                 type=int,
                 default=5,
                 help='display MOST_RECENT burns, default 5')
+
         self.edit_parser = self.subparsers.add_parser(
                 'edit', help='not yet implemented')
         self.edit_parser.add_argument(
@@ -61,13 +62,13 @@ class Arguments():
 
         self.rm_parser = self.subparsers.add_parser(
                 'rm',
-                help='remove specific entries')
+                help='remove specific burns')
         self.rm_parser.add_argument(
                 '--most-recent',
                 dest='most_recent',
                 type=int,
                 default=1,
-                help='remove MOST_RECENT entries')
+                help='remove MOST_RECENT burns')
 
         self.args = self.parser.parse_args()
         #print(f"self.args.runlevel='{self.args.runlevel}'")
