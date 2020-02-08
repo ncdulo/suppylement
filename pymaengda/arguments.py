@@ -5,7 +5,10 @@ class Arguments():
     def __init__(self):
         print('Arguments.__init__')
         self.parser = argparse.ArgumentParser(
-                description='Quick & easy to use kratom burn tracking software'
+                description='''
+                Quick & easy to use kratom burn tracking software
+                https://github.com/ncdulo/pymaengda
+                '''
             )
 
     def parse_args(self):
