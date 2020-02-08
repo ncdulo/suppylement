@@ -76,49 +76,23 @@ class Application():
 
 
     def run(self):
-        '''I think a lot of the below block, regarding custom read arguments
-        and such may be better off in it's own function. I can see it being
-        reused. Might it be best in the Data class though?'''
-
-        # Test command. Yes, it works.
-        #write = self.reader.write_data(data_dir + data_file + '.out', data)
-
-        if self.args.runlevel is not None:
-            runlevel = self.args.runlevel
+        '''At this point, we have already created our Data instance and parsed
+        arguments. We can begin branching off into different execution modes.
+        Certain modes should display the data after the action has been
+        performed as a sort of verification. In these cases, just call
+        self.display() again.'''
+        if self.args.mode == 'list':
+            self.display()
+        elif self.args.mode == 'edit':
+            self.edit()
+            self.display()
+        elif self.args.mode == 'burn':
+            self.create()
+            self.display()
+        elif self.args.mode == 'rm':
+            self.delete()
+            self.display()
+        elif self.args.mode == 'stats':
+            print('statistics')
         else:
-            runlevel = 1
-
-        while runlevel > 0:
-            '''Main program logic loop. Parse the values given on the command
-            line and execute the desired functions. In many cases, this will
-            only loop once. Certain cases such as updating a row will result
-            in the loop repeating to display the updated row.
-
-            Runlevels:
-              0 - quit
-              1 - display
-              2 - edit
-              3 - create
-              4 - delete
-              8 - statistics'''
-            if runlevel == 0:
-                print('quit')
-                break
-            elif runlevel == 1:
-                self.display()
-                runlevel = 0
-            elif runlevel == 2:
-                self.edit()
-                runlevel = 1
-            elif runlevel == 3:
-                self.create()
-                runlevel = 1
-            elif runlevel == 4:
-                self.delete()
-                runlevel = 1
-            elif runlevel == 8:
-                print('statistics')
-                runlevel = 1
-            else:
-                print('Unknown runlevel')
-                runlevel = 0
+            print('Unknown mode')
