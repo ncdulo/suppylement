@@ -23,32 +23,24 @@ class Application():
         the best course of action. We do not read any data here as some
         argument combinations will not require any to be read (help, version
         information). '''
-        self.data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
-        self.data_csv = '/test.csv'
-        self.data_file = self.data_dir + self.data_csv
-        self.reader = data.Data()
+        data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
+        data_csv = '/test.csv'
+        data_file = data_dir + data_csv
+
+        self.reader = data.Data(data_file, data_file + '.out')
         self.arguments = arguments.Arguments()
         self.args = self.arguments.parse_args()
 
-
-    def read_data(self, infile, *args, **kwargs):
-        data = self.reader.read_data(infile, *args,
-                index_col=0, **kwargs)
-
-        return data
-
-
-    def write_data(self, outfile, data, *args, **kwargs):
-        return self.reader.write_data(outfile + '.out',
-                data, *args, **kwargs)
-
+        self.default_read_args = {
+                'index_col': 0
+            }
 
     def display(self):
         '''Parse arguments for specifiers such as limit, order, etc
         Read data from disk
         Format data, if necessary
         Display data'''
-        data = self.read_data(self.data_file)
+        data = self.reader.read_data(**self.default_read_args)
 
         print('Displaying all records...')
         print(data)
@@ -57,8 +49,8 @@ class Application():
     def edit(self):
         '''This would make sense to combine delete then create to simplify
         the function. Need to think through how we call these functions.'''
-        data = self.read_data(self.data_file)
-        write = self.write_data(self.data_file, data)
+        data = self.reader.read_data(**self.default_read_args)
+        self.reader.write_data()
 
 
     def create(self):
@@ -66,8 +58,8 @@ class Application():
         Determine missing data -- timestamp
         Create row to be appended
         Append row to data file on disk'''
-        data = self.read_data(self.data_file)
-        write = self.write_data(self.data_file, data, mode='w')
+        data = self.reader.read_data(**self.default_read_args)
+        self.reader.write_data(mode='w')
         # NOTE: In above, change mode='a' for proper operation
 
 
