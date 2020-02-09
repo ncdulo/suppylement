@@ -6,7 +6,7 @@ class Data():
         self._data = None
         self.read_file = data_file
         if write_file is None:
-            self.write_file = data_file
+            self.write_file = read_file
         else:
             self.write_file = write_file
 
