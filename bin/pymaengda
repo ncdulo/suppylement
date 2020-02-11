@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-BINPATH=`dirname $0`
-python "$BINPATH/../pymaengda/main.py" $@
