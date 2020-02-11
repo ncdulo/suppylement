@@ -1,8 +1,8 @@
-PyMaengDa
+Suppylement
 ---------
-Quick & easy to use kratom burn tracking software. Simple input via command
-line arguments. Data stored in CSV files. Provides output of various statistics
-when requested.
+Quick & easy to use nutritional supplement tracking software. Simple input via
+command line arguments. Data stored in CSV files. Provides output of various
+statistics when requested.
 
 Requirements
 ------------
