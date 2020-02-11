@@ -19,7 +19,36 @@ is simply the package versions used for this project, and specified in
 
 Installation
 ------------
-Do this & that.
+At the moment, the only supported installation is to directly clone this
+repository and either run the wrapper script, or run the Python program
+directly. In the future `pip` installation is planned to be supported.
+
+The commands laid out below will clone this repository, create a new virtual
+environment for PyMaengDa to run in, install the dependencies and display the
+program's help text.
+
+
+```
+# Clone the repo
+git clone https://github.com/ncdulo/pymaengda.git
+cd pymaengda
+
+# Create a new virtual environment and enable it
+python -m venv .env
+source .env/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# To run via wrapper (recommended)
+sh bin/pymaengda
+
+# To run directly
+python pymaengda/main.py
+
+# If using virtual environment, to disable it when finished run:
+deactivate
+```
 
 Usage
 -----
