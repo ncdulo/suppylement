@@ -98,3 +98,14 @@ sh bin/suppylement stats
 sh bin/suppylement stats --full
 ```
 
+Development Goals & Roadmap
+---------------------------
+Stub section for an overview of the current development direction, priorities,
+and goals. The roadmap is planned to be more of a list of features than an
+a full-fledged roadmap document.
+
+
+Contributing
+------------
+This will be filled in with a brief overview of some general guidelines for
+contributing to this project. Also a link to the full text when created.
