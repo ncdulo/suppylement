@@ -78,7 +78,7 @@ class Application():
         elif self.args.mode == 'edit':
             self.edit()
             self.display()
-        elif self.args.mode == 'burn':
+        elif self.args.mode == 'log':
             self.create()
             self.display()
         elif self.args.mode == 'rm':

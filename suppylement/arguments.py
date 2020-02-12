@@ -6,8 +6,8 @@ class Arguments():
         print('Arguments.__init__')
         self.parser = argparse.ArgumentParser(
                 description='''
-                Quick & easy to use kratom burn tracking software
-                https://github.com/ncdulo/pymaengda
+                Quick & easy to use nutritional supplement tracking software
+                https://github.com/ncdulo/suppylement
                 '''
             )
         self.subparsers = self.parser.add_subparsers(
@@ -18,13 +18,13 @@ class Arguments():
         print('parse_args')
 
         self.list_parser = self.subparsers.add_parser(
-                'list', help='list burns')
+                'list', help='list entries')
         self.list_parser.add_argument(
                 '--most-recent',
                 dest='most_recent',
                 type=int,
                 default=5,
-                help='display MOST_RECENT burns, default 5')
+                help='display MOST_RECENT entries, default 5')
 
         self.edit_parser = self.subparsers.add_parser(
                 'edit', help='not yet implemented')
@@ -33,26 +33,26 @@ class Arguments():
                 type=int,
                 help='id of entry to edit')
 
-        self.burn_parser = self.subparsers.add_parser(
-                'burn', help='add a burn')
-        self.burn_parser.add_argument(
+        self.log_parser = self.subparsers.add_parser(
+                'log', help='log an entry')
+        self.log_parser.add_argument(
                 'amount',
                 type=float,
-                help='amount in grams')
-        self.burn_parser.add_argument(
-                'strain',
+                help='amount in miligrams')
+        self.log_parser.add_argument(
+                'name',
                 type=str,
-                help='name of strain burned')
+                help='name of supplement')
 
         self.rm_parser = self.subparsers.add_parser(
                 'rm',
-                help='remove specific burns')
+                help='remove specific entries')
         self.rm_parser.add_argument(
                 '--most-recent',
                 dest='most_recent',
                 type=int,
                 default=1,
-                help='remove MOST_RECENT burns')
+                help='remove MOST_RECENT entries')
 
         self.stats_parser = self.subparsers.add_parser(
                 'stats',
@@ -66,8 +66,8 @@ class Arguments():
         self.args = self.parser.parse_args()
 
         '''Debug text below. Remove for release.'''
-        if self.args.mode == 'burn':
-            print(f"self.args.amount='{self.args.amount}', self.args.strain='{self.args.strain}'")
+        if self.args.mode == 'log':
+            print(f"self.args.amount='{self.args.amount}', self.args.name='{self.args.name}'")
         elif self.args.mode == 'rm':
             print(f'self.args.most_recent = {self.args.most_recent}')
         print(f'self.args.mode = {self.args.mode}')
