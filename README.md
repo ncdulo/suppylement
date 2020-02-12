@@ -98,10 +98,3 @@ sh bin/suppylement stats
 sh bin/suppylement stats --full
 ```
 
-Notice
-------
-This program was created simply as an exercise in working with a slightly
-larger Python project than I have before. Working with data, reading/writing
-files, testing, that sort of thing. Kratom is intended strictly for botanical
-purposes only. Not for human consumption. We cannot condone or encourage any
-personal use or consumption of kratom.
