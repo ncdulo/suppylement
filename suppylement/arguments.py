@@ -67,7 +67,6 @@ class Arguments():
 
         # If we are not given enough arguments, provide a default of list
         # mode to the user.
-        print(sys.argv)
         if (len(sys.argv) < 2):
             self.args = self.parser.parse_args(args=['list'])
         else:
