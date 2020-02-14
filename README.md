@@ -56,6 +56,9 @@ source .env/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
+# Ensure script is executable
+chmod +x bin/suppylement
+
 # To run via wrapper (recommended)
 bin/suppylement --help
 
