@@ -66,7 +66,7 @@ python suppylement/main.py --help
 deactivate
 
 # Link the executable to `/usr/local/bin` so that it's available in `$PATH`
-sudo ln -sf /path/to/dir/with/venv/.env/bin/suppylement /usr/local/bin/suppylement
+sudo ln -sf /path/to/repo/bin/suppylement /usr/local/bin/suppylement
 ```
 
 Usage
