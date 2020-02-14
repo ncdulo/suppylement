@@ -63,7 +63,7 @@ chmod +x bin/suppylement
 bin/suppylement --help
 
 # To run directly
-suppylement/main.py --help
+python suppylement/main.py --help
 
 # If using virtual environment, to disable it when finished run:
 deactivate
