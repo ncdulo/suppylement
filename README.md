@@ -56,8 +56,11 @@ source .env/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
+# Ensure script is executable
+chmod +x bin/suppylement
+
 # To run via wrapper (recommended)
-sh bin/suppylement --help
+bin/suppylement --help
 
 # To run directly
 python suppylement/main.py --help
@@ -78,27 +81,27 @@ that some (most) functionality is currently not fully implemented.
 
 ```
 # Display help
-sh bin/suppylement --help
-sh bin/suppylement log --help
+suppylement --help
+suppylement log --help
 
 # List most recent 5 entries
-sh bin/suppylement list
+suppylement list
 # List most recent 20 entries
-sh bin/suppylement list --most-recent 20
+suppylement list --most-recent 20
 
 # Log a new entry
-sh bin/suppylement log 1000 VitaminC
-sh bin/suppylement log 250 magnesium-citrate
+suppylement log 1000 VitaminC
+suppylement log 250 magnesium-citrate
 
 # Delete the most recent entry
-sh bin/suppylement rm
+suppylement rm
 # Delete the most recent 5 entries
-sh bin/suppylement rm --most-recent 5
+suppylement rm --most-recent 5
 
 # View statistics
-sh bin/suppylement stats
+suppylement stats
 # View full statistics
-sh bin/suppylement stats --full
+suppylement stats --full
 ```
 
 Development Goals & Roadmap
