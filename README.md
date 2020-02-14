@@ -64,6 +64,9 @@ python suppylement/main.py --help
 
 # If using virtual environment, to disable it when finished run:
 deactivate
+
+# Link the executable to `/usr/local/bin` so that it's available in `$PATH`
+sudo ln -sf /path/to/repo/bin/suppylement /usr/local/bin/suppylement
 ```
 
 Usage
