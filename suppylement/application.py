@@ -69,6 +69,7 @@ class Application():
         Create row to be appended
         Append row to data file on disk'''
         data = self.reader.read_data(**self.default_read_args)
+        self.reader.new_entry(self.args.amount, self.args.name)
         self.reader.write_data(mode='w')
         # NOTE: In above, change mode='a' for proper operation
 

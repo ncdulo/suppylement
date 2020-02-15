@@ -22,3 +22,21 @@ class Data():
             print('Error no data to write')
             return False
         self._data.to_csv(self.write_file, *args, **kwargs)
+
+    def new_entry(self, amount, name):
+        '''This function will accept an amount and supplement name, create a
+        Pandas DataFrame with it, then finally append it to self.write_file'''
+        entry = {
+                'timestamp': ['2020-02-15 16:20:00'],
+                'amount': [amount],
+                'name': [name]
+            }
+        # Commenting out below -- I think we may be better off letting
+        # Pandas add an index to our data. May make working with things
+        # easier such as selecting, and inserting like here.
+        #entry_df = pd.DataFrame(data=entry, index=entry['timestamp'])
+        entry_df = pd.DataFrame(data=entry)
+        final_df = self._data.append(entry_df, ignore_index=True)
+        print(entry_df)
+        print('----')
+        print(final_df)
