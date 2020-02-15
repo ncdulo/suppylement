@@ -2,6 +2,7 @@ import arguments
 import data
 
 import os
+import sys
 
 
 ''' Basic program structure
@@ -18,7 +19,7 @@ Display output'''
 
 
 class Application():
-    def __init__(self):
+    def __init__(self, args=None):
         '''This seems like a good place to parse our arguments and decide
         the best course of action. We do not read any data here as some
         argument combinations will not require any to be read (help, version
@@ -26,10 +27,21 @@ class Application():
         data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
         data_csv = '/test.csv'
         data_file = data_dir + data_csv
-
         self.reader = data.Data(data_file, data_file + '.out')
+
         self.arguments = arguments.Arguments()
-        self.args = self.arguments.parse_args()
+        # If no args provided, default to command line args
+        if args is None:
+            # If command line args do not include any mode, default to list
+            if len(sys.argv) < 2:
+                self.args = self.arguments.parse_args(['list'])
+            # Command line args are long enough
+            else:
+                print(sys.argv[1:])
+                self.args = self.arguments.parse_args(sys.argv[1:])
+        # We have been given a custom argument list
+        else:
+            self.args = self.arguments.parse_args(args)
 
         self.default_read_args = {
                 'index_col': 0

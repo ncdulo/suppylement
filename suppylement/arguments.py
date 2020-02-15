@@ -16,7 +16,7 @@ class Arguments():
                 dest='mode',
                 help='modes')
 
-    def parse_args(self):
+    def parse_args(self, args):
         print('parse_args')
 
         self.list_parser = self.subparsers.add_parser(
@@ -65,12 +65,7 @@ class Arguments():
                 action='store_true',
                 help='full output mode')
 
-        # If we are not given enough arguments, provide a default of list
-        # mode to the user.
-        if (len(sys.argv) < 2):
-            self.args = self.parser.parse_args(args=['list'])
-        else:
-            self.args = self.parser.parse_args()
+        self.args = self.parser.parse_args(args)
 
         '''Debug text below. Remove for release.'''
         if self.args.mode == 'log':
