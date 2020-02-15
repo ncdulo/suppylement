@@ -39,7 +39,7 @@ class Arguments():
                 'log', help='log an entry')
         self.log_parser.add_argument(
                 'amount',
-                type=float,
+                type=int,
                 help='amount in miligrams')
         self.log_parser.add_argument(
                 'name',
