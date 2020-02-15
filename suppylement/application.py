@@ -57,13 +57,11 @@ class Application():
         print('Displaying all records...')
         print(data)
 
-
     def edit(self):
         '''This would make sense to combine delete then create to simplify
         the function. Need to think through how we call these functions.'''
         data = self.reader.read_data(**self.default_read_args)
         self.reader.write_data()
-
 
     def create(self):
         '''Parse arguments for data to be written (e.g. strain, amount)
@@ -74,10 +72,8 @@ class Application():
         self.reader.write_data(mode='w')
         # NOTE: In above, change mode='a' for proper operation
 
-
     def delete(self):
         pass
-
 
     def run(self):
         '''At this point, we have already created our Data instance and parsed

@@ -22,4 +22,3 @@ class Data():
             print('Error no data to write')
             return False
         self._data.to_csv(self.write_file, *args, **kwargs)
-
