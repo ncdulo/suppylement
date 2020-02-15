@@ -73,7 +73,6 @@ class Application():
         data = self.reader.read_data(**self.default_read_args)
         self.reader.new_entry(self.args.amount, self.args.name)
         self.reader.write_data(mode='w')
-        # NOTE: In above, change mode='a' for proper operation
 
     def delete(self):
         pass
