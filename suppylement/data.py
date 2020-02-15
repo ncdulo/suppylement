@@ -1,3 +1,5 @@
+import datetime
+
 import pandas as pd
 
 
@@ -6,7 +8,7 @@ class Data():
         self._data = None
         self.read_file = data_file
         if write_file is None:
-            self.write_file = read_file
+            self.write_file = self.read_file
         else:
             self.write_file = write_file
 
@@ -25,18 +27,16 @@ class Data():
 
     def new_entry(self, amount, name):
         '''This function will accept an amount and supplement name, create a
-        Pandas DataFrame with it, then finally append it to self.write_file'''
+        Pandas DataFrame with it, then finally append it to self._data.
+        It is up to Application to call self.write_data to save to disk.'''
         entry = {
-                'timestamp': ['2020-02-15 16:20:00'],
+                'timestamp': [datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
                 'amount': [amount],
                 'name': [name]
             }
-        # Commenting out below -- I think we may be better off letting
-        # Pandas add an index to our data. May make working with things
-        # easier such as selecting, and inserting like here.
-        #entry_df = pd.DataFrame(data=entry, index=entry['timestamp'])
+
         entry_df = pd.DataFrame(data=entry)
-        final_df = self._data.append(entry_df, ignore_index=True)
-        print(entry_df)
-        print('----')
-        print(final_df)
+        self._data = self._data.append(entry_df, ignore_index=True)
+        print('Entry added!')
+        print('Full DataFrame as it would be written to disk:')
+        print(self._data)
