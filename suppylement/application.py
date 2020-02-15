@@ -25,9 +25,11 @@ class Application():
         argument combinations will not require any to be read (help, version
         information). '''
         data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
-        data_csv = '/test.csv'
+        #data_csv = '/test.csv'
+        data_csv = '/data.csv'
         data_file = data_dir + data_csv
-        self.reader = data.Data(data_file, data_file + '.out')
+        #self.reader = data.Data(data_file, data_file + '.out')
+        self.reader = data.Data(data_file)
 
         self.arguments = arguments.Arguments()
         # If no args provided, default to command line args
@@ -69,8 +71,8 @@ class Application():
         Create row to be appended
         Append row to data file on disk'''
         data = self.reader.read_data(**self.default_read_args)
+        self.reader.new_entry(self.args.amount, self.args.name)
         self.reader.write_data(mode='w')
-        # NOTE: In above, change mode='a' for proper operation
 
     def delete(self):
         pass
