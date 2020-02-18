@@ -1,6 +1,7 @@
 import datetime
 
 import pandas as pd
+import os.path
 
 
 class Data():
@@ -11,6 +12,8 @@ class Data():
             self.write_file = self.read_file
         else:
             self.write_file = write_file
+        if not os.path.isfile(self.read_file):
+            raise FileNotFoundError(f'read_file not found!\n{self.read_file}')
 
     def read_data(self, *args, **kwargs):
         self._data = pd.read_csv(self.read_file, *args, **kwargs)
