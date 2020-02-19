@@ -1,6 +1,7 @@
 import datetime
 
 import pandas as pd
+import pandas.errors as pd_error
 import os.path
 
 
@@ -16,11 +17,16 @@ class Data():
             raise FileNotFoundError(f'read_file not found!\n{self.read_file}')
 
     def read_data(self, *args, **kwargs):
-        self._data = pd.read_csv(self.read_file, *args, **kwargs)
-
-        if self._data is None:
-            print(f'Error reading {infile}')
-        return self._data
+        try:
+            self._data = pd.read_csv(self.read_file, *args, **kwargs)
+        except pd_error.ParserError as parser_error:
+            print(f'Parser error!\n{parser_error}')
+            return None
+        except pd_error.EmptyDataError as empty_data:
+            print(f'Empty data error!\n{empty_data}')
+            return None
+        else:
+            return self._data
 
     def write_data(self, *args, **kwargs):
         if self._data is None:

@@ -57,7 +57,10 @@ class Application():
         data = self.reader.read_data(**self.default_read_args)
 
         print('Displaying all records...')
-        print(data)
+        if data is None:
+            print('No data to display...')
+        else:
+            print(data)
 
     def edit(self):
         '''This would make sense to combine delete then create to simplify
