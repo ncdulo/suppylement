@@ -24,8 +24,7 @@ class Data():
 
     def write_data(self, *args, **kwargs):
         if self._data is None:
-            print('Error no data to write')
-            return False
+            raise ValueError('Error no data to write')
         self._data.to_csv(self.write_file, *args, **kwargs)
 
     def new_entry(self, amount, name):
