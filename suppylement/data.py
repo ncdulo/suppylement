@@ -38,6 +38,9 @@ class Data():
         '''This function will accept an amount and supplement name, create a
         Pandas DataFrame with it, then finally append it to self._data.
         It is up to Application to call self.write_data to save to disk.'''
+        if not amount > 0:
+            raise ValueError(f'Error: amount ({amount}) must be greater than 0')
+
         entry = {
                 'timestamp': [datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')],
                 'amount': [amount],
