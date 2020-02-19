@@ -28,6 +28,7 @@ class Data():
         else:
             return self._data
 
+    # TODO: Need error checking for failed write condition
     def write_data(self, *args, **kwargs):
         if self._data is None:
             raise ValueError('Error no data to write')
@@ -43,8 +44,17 @@ class Data():
                 'name': [name]
             }
 
-        entry_df = pd.DataFrame(data=entry)
-        self._data = self._data.append(entry_df, ignore_index=True)
-        print('Entry added!')
-        print('Full DataFrame as it would be written to disk:')
-        print(self._data)
+        try:
+            entry_df = pd.DataFrame(data=entry)
+        except (ValueError, TypeError) as error:
+            print(f'Exception caught in new_entry!\n{error}')
+            return None
+        else:
+            try:
+                self._data = self._data.append(entry_df, ignore_index=True)
+                print('Entry created!')
+                print(entry_df)
+                return entry_df
+            except TypeError as error:
+                print(f'Exception caught in new_entry!\n{error}')
+                return None

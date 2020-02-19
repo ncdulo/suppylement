@@ -74,8 +74,11 @@ class Application():
         Create row to be appended
         Append row to data file on disk'''
         data = self.reader.read_data(**self.default_read_args)
-        self.reader.new_entry(self.args.amount, self.args.name)
-        self.reader.write_data(mode='w')
+        if self.reader.new_entry(self.args.amount, self.args.name) is not None:
+            self.reader.write_data(mode='w')
+            # TODO: Need error checking for failed write condition
+        else:
+            print('Error creating new entry!')
 
     def delete(self):
         pass
