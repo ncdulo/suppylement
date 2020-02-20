@@ -27,6 +27,24 @@ class Arguments():
                 type=int,
                 default=5,
                 help='display MOST_RECENT entries, default 5')
+        self.list_parser.add_argument(
+                '--less',
+                dest='search_less',
+                type=int,
+                default=-1,
+                help='list entries where amount is less than SEARCH_LESS')
+        self.list_parser.add_argument(
+                '--more',
+                dest='search_more',
+                type=int,
+                default=-1,
+                help='list entries where amount is greater than SEARCH_MORE')
+        self.list_parser.add_argument(
+                '--name',
+                dest='search_name',
+                type=str,
+                default='',
+                help='list entries where name equals SEARCH_NAME')
 
         self.edit_parser = self.subparsers.add_parser(
                 'edit', help='not yet implemented')

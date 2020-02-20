@@ -56,7 +56,44 @@ class Application():
         Display data'''
         data = self.reader.read_data(**self.default_read_args)
 
-        print('Displaying all records...')
+        if self.args.mode == 'list':
+            if self.args.most_recent == -1:
+                # -1 limit calls for display all data, most recent first
+                self.args.most_recent = len(data)
+            elif self.args.most_recent < -1 or self.args.most_recent == 0:
+                raise ValueError(f'''\
+Error: most_recent ({self.args.most_recent}) must be greater than 0''')
+
+            if len(self.args.search_name) > 0:
+                data = data[data['name'] == self.args.search_name]
+
+            # Filter rows by 'less than'. Search is exclusive.
+            if not self.args.search_less == -1:
+                if self.args.search_less < -1 or self.args.search_less == 0:
+                    raise ValueError(f'''\
+Error: search_less ({self.args.search_less}) must be greater than 0''')
+                data = data[data['amount'] < self.args.search_less]
+
+            # Filter rows by 'greater than'. Search is inclusive.
+            if not self.args.search_more == -1:
+                if self.args.search_more < -1 or self.args.search_more == 0:
+                    raise ValueError(f'''\
+Error: search_more ({self.args.search_more}) must be greater than 0''')
+                data = data[data['amount'] >= self.args.search_more]
+
+            # Calculate the slice start index. Because of the zero
+            # indexing, we add one to get the proper length. Then
+            # multiply by -1 to invert as we are slicing backwards.
+            start = (self.args.most_recent+1) * -1
+            data = data.iloc[:start:-1]
+
+        # We did *not* call 'list' mode directly, use defaults.
+        else:
+            # Go through the data backwards by index, grabbing the last
+            # five entries. Not sure exactly why it needs to be offset 1.
+            data = data.iloc[:-6:-1]
+
+        print(f'Displaying most recent {len(data)} records...')
         if data is None:
             print('No data to display...')
         else:
