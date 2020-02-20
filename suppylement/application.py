@@ -66,6 +66,14 @@ Error: most_recent ({self.args.most_recent}) must be greater than 0''')
 
             if len(self.args.search_name) > 0:
                 data = data[data['name'] == self.args.search_name]
+
+            if not self.args.search_less == -1:
+                # Filter rows by 'less than'
+                data = data[data['amount'] < self.args.search_less]
+
+            if not self.args.search_more == -1:
+                # Filter rows by 'greater than'
+                data = data[data['amount'] > self.args.search_more]
             # Calculate the slice start index. Because of the zero
             # indexing, we add one to get the proper length. Then
             # multiply by -1 to invert as we are slicing backwards.
