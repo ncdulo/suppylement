@@ -110,11 +110,13 @@ Error: search_more ({self.args.search_more}) must be greater than 0''')
         Create row to be appended
         Append row to data file on disk'''
         data = self.reader.read_data(**self.default_read_args)
-        if self.reader.new_entry(self.args.amount, self.args.name) is not None:
-            self.reader.write_data(mode='w')
-            # TODO: Need error checking for failed write condition
+        try:
+            entry_df = self.reader.new_entry(self.args.amount, self.args.name)
+        except ValueError as error:
+            print(f'ValueError caught!\n{error}')
+            print('\n\n  Entry NOT added!\n\n')
         else:
-            print('Error creating new entry!')
+            self.reader.write_data(mode='w')
 
     def delete(self):
         pass
