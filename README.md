@@ -44,7 +44,7 @@ environment for Suppylement to run in, install the dependencies and display
 the program's help text.
 
 
-```
+```bash
 # Clone the repo
 git clone https://github.com/ncdulo/suppylement.git
 cd suppylement
@@ -82,7 +82,7 @@ has not be decided on or implemented yet but anything that is can be listed
 with the `-h` or `--help` argument. Some basic examples are listed below. Note
 that some (most) functionality is currently not fully implemented.
 
-```
+```bash
 # Display help
 suppylement --help
 suppylement log --help
