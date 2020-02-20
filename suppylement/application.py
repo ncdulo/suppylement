@@ -39,7 +39,6 @@ class Application():
                 self.args = self.arguments.parse_args(['list'])
             # Command line args are long enough
             else:
-                print(sys.argv[1:])
                 self.args = self.arguments.parse_args(sys.argv[1:])
         # We have been given a custom argument list
         else:
@@ -106,7 +105,7 @@ Error: search_more ({self.args.search_more}) must be greater than 0''')
         self.reader.write_data()
 
     def create(self):
-        '''Parse arguments for data to be written (e.g. strain, amount)
+        '''Parse arguments for data to be written (e.g. name, amount)
         Determine missing data -- timestamp
         Create row to be appended
         Append row to data file on disk'''
