@@ -63,21 +63,24 @@ class Application():
             elif self.args.most_recent < -1 or self.args.most_recent == 0:
                 raise ValueError(f'''\
 Error: most_recent ({self.args.most_recent}) must be greater than 0''')
+
+            if len(self.args.search_name) > 0:
+                data = data[data['name'] == self.args.search_name]
             # Calculate the slice start index. Because of the zero
             # indexing, we add one to get the proper length. Then
             # multiply by -1 to invert as we are slicing backwards.
             start = (self.args.most_recent+1) * -1
-            display_data = data.iloc[:start:-1]
+            data = data.iloc[:start:-1]
         else:
             # Go through the data backwards by index, grabbing the last
             # five entries. Not sure exactly why it needs to be offset 1.
-            display_data = data.iloc[:-6:-1]
+            data = data.iloc[:-6:-1]
 
-        print(f'Displaying most recent {len(display_data)} records...')
-        if display_data is None:
+        print(f'Displaying most recent {len(data)} records...')
+        if data is None:
             print('No data to display...')
         else:
-            print(display_data)
+            print(data)
 
     def edit(self):
         '''This would make sense to combine delete then create to simplify
