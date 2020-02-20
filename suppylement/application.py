@@ -57,7 +57,10 @@ class Application():
         data = self.reader.read_data(**self.default_read_args)
 
         if self.args.mode == 'list':
-            if self.args.most_recent < 1:
+            if self.args.most_recent == -1:
+                # -1 limit calls for display all data, most recent first
+                self.args.most_recent = len(data)
+            elif self.args.most_recent < -1 or self.args.most_recent == 0:
                 raise ValueError(f'''\
 Error: most_recent ({self.args.most_recent}) must be greater than 0''')
             # Calculate the slice start index. Because of the zero
