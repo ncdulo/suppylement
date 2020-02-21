@@ -1,4 +1,5 @@
 import arguments
+import configuration
 import data
 
 import os
@@ -24,6 +25,8 @@ class Application():
         the best course of action. We do not read any data here as some
         argument combinations will not require any to be read (help, version
         information). '''
+        self.config = configuration.Configuration()
+
         data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
         #data_csv = '/test.csv'
         data_csv = '/data.csv'
