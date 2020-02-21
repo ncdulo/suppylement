@@ -27,12 +27,8 @@ class Application():
         information). '''
         self.config = configuration.Configuration()
 
-        data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
-        #data_csv = '/test.csv'
-        data_csv = '/data.csv'
-        data_file = data_dir + data_csv
-        #self.reader = data.Data(data_file, data_file + '.out')
-        self.reader = data.Data(data_file)
+        self.reader = data.Data(self.config.read_file,
+                self.config.write_file)
 
         self.arguments = arguments.Arguments()
         # If no args provided, default to command line args

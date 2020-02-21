@@ -20,6 +20,23 @@ class Configuration():
         with open(self.default_config_file) as f:
             self.parser.read_file(f)
         self.parser.read([self.user_config_file])
-        print(self.base_dir)
-        print(self.default_config_file)
-        print(self.user_config_file)
+
+        # Assemble our data file path here. This allows the config file
+        # to use relative paths to the data file. It is also a shorter
+        # alias for `self.config.parser.get('read_file')`.
+        self.read_file = self.base_dir +\
+                self.parser.get('filenames', 'read_file')
+        self.write_file = self.base_dir +\
+                self.parser.get('filenames', 'write_file')
+
+        # Debug text below
+        #print(self.base_dir)
+        #print(self.default_config_file)
+        #print(self.user_config_file)
+
+        #for section_name in self.parser.sections():
+        #    print('section:   ', section_name)
+        #    print('  options: ', self.parser.options(section_name))
+        #    for name, value in self.parser.items(section_name):
+        #        print('  {} = {}'.format(name, value))
+        #    print()
