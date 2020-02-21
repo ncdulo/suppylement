@@ -67,6 +67,12 @@ class Arguments():
                 'rm',
                 help='remove specific entries')
         self.rm_parser.add_argument(
+                '--id',
+                dest='id_to_remove',
+                type=int,
+                default=-1,
+                help='remove entry number ID_TO_REMOVE')
+        self.rm_parser.add_argument(
                 '--most-recent',
                 dest='most_recent',
                 type=int,
