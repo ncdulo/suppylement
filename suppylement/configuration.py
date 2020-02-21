@@ -7,12 +7,13 @@ class Configuration():
     options. We first read our defaults config file, populating our
     dictionary with default values. Then we read the user config file
     and any values set within that file should over-write the defaults.'''
-    def __init__(self):
+
+    def __init__(self, default_config_file, user_config_file):
         '''Set up our configparser instance. Read default values.
         Apply user values on top of default values.'''
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
-        self.default_config_file = self.base_dir + '/suppylement_defaults.ini'
-        self.user_config_file = self.base_dir + '/suppylement.ini'
+        self.default_config_file = self.base_dir + default_config_file
+        self.user_config_file = self.base_dir + user_config_file
         # TODO: Prefer USER_CONFIG_DIR from appdirs module, if it exists.
 
         self.parser = configparser.ConfigParser()

@@ -25,7 +25,9 @@ class Application():
         the best course of action. We do not read any data here as some
         argument combinations will not require any to be read (help, version
         information). '''
-        self.config = configuration.Configuration()
+        self.config = configuration.Configuration(
+                '/suppylement_defaults.ini',
+                '/suppylement.ini')
 
         self.reader = data.Data(self.config.read_file,
                 self.config.write_file)
