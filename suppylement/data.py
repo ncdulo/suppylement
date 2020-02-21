@@ -78,3 +78,28 @@ class Data():
             except TypeError as error:
                 print(f'Exception caught in new_entry!\n{error}')
                 return None
+
+    def delete_row_by_id(self, id_to_remove, confirm=False):
+        '''Remove a row as specified by it's index value. There is some
+        bounds checking to ensure the ID is within the limits of the
+        DataFrame. The index will also be reset so the values flow without
+        gaps after removal. Following in design for other members of this
+        class, we do not save any data. We only update the values and leave
+        it up to Application to verify and/or save data when necessary.'''
+        if 0 <= id_to_remove <= len(self._data)-1:
+            print(f'Removing entry ID {id_to_remove}:')
+            print(self._data.iloc[id_to_remove])
+            print()
+            if confirm:
+                choice = input('Are you sure you want to delete this entry? '
+                        "Enter 'Y' to confirm.\n > ")
+                if not choice == 'Y':
+                    print('Aborted')
+                    return None
+            # Delete the requested row and then reset our index column
+            self._data = self._data.drop(self._data.index[id_to_remove])
+            self._data.reset_index(drop=True, inplace=True)
+            return True
+        else:
+            raise ValueError('Error id_to_remove out of bounds!\n'
+                    f'(0 <= {id_to_remove} <= {len(self._data)-1})')

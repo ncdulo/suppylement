@@ -119,7 +119,21 @@ Error: search_more ({self.args.search_more}) must be greater than 0''')
             self.reader.write_data(mode='w')
 
     def delete(self):
-        pass
+        data = self.reader.read_data(**self.default_read_args)
+
+        # Ensure our ID is greater than 0, less than number of rows
+        try:
+            success = self.reader.delete_row_by_id(self.args.id_to_remove,
+                    self.args.rm_interactive)
+        except ValueError as error:
+            print(f'ValueError caught!\n{error}')
+            print('\n\n  Entry NOT deleted!\n\n')
+        else:
+            if success:
+                print('Entry removed!')
+                self.reader.write_data()
+            else:
+                print('Entry not removed!')
 
     def run(self):
         '''At this point, we have already created our Data instance and parsed
