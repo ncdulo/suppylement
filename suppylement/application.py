@@ -33,9 +33,14 @@ class Application():
         self.arguments = arguments.Arguments()
         # If no args provided, default to command line args
         if args is None:
-            # If command line args do not include any mode, default to list
+            # If command line args do not include any mode, default to the
+            # value from the ini file, finally default to help mode.
             if len(sys.argv) < 2:
-                self.args = self.arguments.parse_args(['list'])
+                default_args = self.config.parser.get(
+                        'defaults',
+                        'custom_args',
+                        fallback='-h')
+                self.args = self.arguments.parse_args(default_args.split())
             # Command line args are long enough
             else:
                 self.args = self.arguments.parse_args(sys.argv[1:])
