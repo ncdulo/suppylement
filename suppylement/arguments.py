@@ -73,6 +73,12 @@ class Arguments():
                 default=-1,
                 help='remove entry number ID_TO_REMOVE')
         self.rm_parser.add_argument(
+                '-i',
+                dest='rm_interactive',
+                action='store_true',
+                default=False,
+                help='confirm before deleting row')
+        self.rm_parser.add_argument(
                 '--most-recent',
                 dest='most_recent',
                 type=int,
