@@ -129,8 +129,10 @@ Error: search_more ({self.args.search_more}) must be greater than 0''')
 
         # Ensure our ID is greater than 0, less than number of rows
         try:
+            confirm_delete = self.config.parser.getboolean(
+                    'defaults', 'confirm_delete')
             success = self.reader.delete_row_by_id(self.args.id_to_remove,
-                    self.args.rm_interactive)
+                    self.args.rm_interactive or confirm_delete)
         except ValueError as error:
             print(f'ValueError caught!\n{error}')
             print('\n\n  Entry NOT deleted!\n\n')
