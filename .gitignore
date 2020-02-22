@@ -1,6 +1,7 @@
 # Project specific files
 data/data.csv
 data/test.csv.out
+suppylement/suppylement.ini
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

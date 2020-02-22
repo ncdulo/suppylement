@@ -1,4 +1,5 @@
 import arguments
+import configuration
 import data
 
 import os
@@ -24,19 +25,24 @@ class Application():
         the best course of action. We do not read any data here as some
         argument combinations will not require any to be read (help, version
         information). '''
-        data_dir = os.path.dirname(os.path.abspath(__file__)) + '/../data'
-        #data_csv = '/test.csv'
-        data_csv = '/data.csv'
-        data_file = data_dir + data_csv
-        #self.reader = data.Data(data_file, data_file + '.out')
-        self.reader = data.Data(data_file)
+        self.config = configuration.Configuration(
+                '/suppylement_defaults.ini',
+                '/suppylement.ini')
+
+        self.reader = data.Data(self.config.read_file,
+                self.config.write_file)
 
         self.arguments = arguments.Arguments()
         # If no args provided, default to command line args
         if args is None:
-            # If command line args do not include any mode, default to list
+            # If command line args do not include any mode, default to the
+            # value from the ini file, finally default to help mode.
             if len(sys.argv) < 2:
-                self.args = self.arguments.parse_args(['list'])
+                default_args = self.config.parser.get(
+                        'defaults',
+                        'custom_args',
+                        fallback='-h')
+                self.args = self.arguments.parse_args(default_args.split())
             # Command line args are long enough
             else:
                 self.args = self.arguments.parse_args(sys.argv[1:])
@@ -123,8 +129,10 @@ Error: search_more ({self.args.search_more}) must be greater than 0''')
 
         # Ensure our ID is greater than 0, less than number of rows
         try:
+            confirm_delete = self.config.parser.getboolean(
+                    'defaults', 'confirm_delete')
             success = self.reader.delete_row_by_id(self.args.id_to_remove,
-                    self.args.rm_interactive)
+                    self.args.rm_interactive or confirm_delete)
         except ValueError as error:
             print(f'ValueError caught!\n{error}')
             print('\n\n  Entry NOT deleted!\n\n')
