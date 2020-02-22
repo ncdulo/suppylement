@@ -24,7 +24,16 @@ class Data():
         a Pandas DataFrame. Handle any exceptions thrown and return None to
         indicate failure. Otherwise, maintain an instance copy of the data
         and return a copy for Application to use. The instance copy of the data
-        will be used for any future operations on it.'''
+        will be used for any future operations on it.
+
+        Note: I am just realizing, we never actually check for presence of
+        an instance copy of the data to return from our cache. I am deciding
+        not to add that check in at this point. We *want* to be able to read
+        from disk and reset our data. This way any filters we run on the data
+        are not saved with it. For all operations involving write we should
+        read the data, perform our operation, then re-read the data back
+        to confirm. This will reset and filter or selection changes we may
+        have made to our data earlier in execution.'''
         try:
             self._data = pd.read_csv(self.read_file, *args, **kwargs)
         except pd_error.ParserError as parser_error:
