@@ -1,5 +1,5 @@
 import configparser
-import os
+import pathlib
 
 
 class Configuration():
@@ -11,9 +11,11 @@ class Configuration():
     def __init__(self, default_config_file, user_config_file):
         '''Set up our configparser instance. Read default values.
         Apply user values on top of default values.'''
-        self.base_dir = os.path.dirname(os.path.abspath(__file__))
-        self.default_config_file = self.base_dir + default_config_file
-        self.user_config_file = self.base_dir + user_config_file
+        self.base_dir = pathlib.Path(__file__).parent.resolve()
+        self.default_config_file = self.base_dir /\
+                pathlib.Path(default_config_file)
+        self.user_config_file = self.base_dir /\
+                pathlib.Path(user_config_file)
         # TODO: Prefer USER_CONFIG_DIR from appdirs module, if it exists.
 
         self.parser = configparser.ConfigParser()
@@ -25,9 +27,9 @@ class Configuration():
         # Assemble our data file path here. This allows the config file
         # to use relative paths to the data file. It is also a shorter
         # alias for `self.config.parser.get('read_file')`.
-        self.read_file = self.base_dir +\
+        self.read_file = self.base_dir /\
                 self.parser.get('filenames', 'read_file')
-        self.write_file = self.base_dir +\
+        self.write_file = self.base_dir /\
                 self.parser.get('filenames', 'write_file')
 
         # Debug text below
