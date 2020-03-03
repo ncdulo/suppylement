@@ -2,7 +2,6 @@ import arguments
 import configuration
 import data
 
-import os
 import sys
 
 
@@ -26,8 +25,8 @@ class Application():
         argument combinations will not require any to be read (help, version
         information). '''
         self.config = configuration.Configuration(
-                '/suppylement_defaults.ini',
-                '/suppylement.ini')
+                'suppylement_defaults.ini',
+                'suppylement.ini')
 
         self.reader = data.Data(self.config.read_file,
                 self.config.write_file)

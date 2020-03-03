@@ -2,7 +2,7 @@ import datetime
 
 import pandas as pd
 import pandas.errors as pd_error
-import os.path
+import pathlib
 
 
 class Data():
@@ -16,7 +16,7 @@ class Data():
         else:
             self.write_file = write_file
         # Check to ensure our read file actually exists before we need it.
-        if not os.path.isfile(self.read_file):
+        if not pathlib.Path(self.read_file).exists():
             raise FileNotFoundError(f'read_file not found!\n{self.read_file}')
 
     def read_data(self, *args, **kwargs):
