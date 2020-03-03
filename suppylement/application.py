@@ -2,7 +2,6 @@ import arguments
 import configuration
 import data
 
-import os
 import sys
 
 
