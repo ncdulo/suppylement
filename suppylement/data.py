@@ -81,7 +81,7 @@ class Data():
                 print('Entry created!')
                 print(entry_df)
                 # Note we do not write data. Only return as an indication of
-                # success or failure. Application itself much decide when
+                # success or failure. Application itself will decide when
                 # to write the data, or not.
                 return entry_df
             except TypeError as error:

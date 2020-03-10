@@ -125,11 +125,14 @@ Error: search_more ({self.args.search_more}) must be greater than 0''')
 
     def delete(self):
         data = self.reader.read_data(**self.default_read_args)
+        confirm_delete = self.config.parser.getboolean(
+                'defaults', 'confirm_delete')
 
-        # Ensure our ID is greater than 0, less than number of rows
+        '''Attempt to delete the argument specified row, handling exception
+        for out of bounds, and unspecified errors. This looks more confusing
+        than it actually is. That likely means this is a good candidate for
+        rewriting.'''
         try:
-            confirm_delete = self.config.parser.getboolean(
-                    'defaults', 'confirm_delete')
             success = self.reader.delete_row_by_id(self.args.id_to_remove,
                     self.args.rm_interactive or confirm_delete)
         except ValueError as error:
