@@ -112,3 +112,32 @@ class Data():
         else:
             raise ValueError('Error id_to_remove out of bounds!\n'
                     f'(0 <= {id_to_remove} <= {len(self._data)-1})')
+
+    def filter_data(self, filters_to_apply):
+        # First, separate the columns from their filters
+        for column, col_filters in filters_to_apply.items():
+            #print(f'{column}: {{')
+            # Get all filters specific to this column
+            for filter_key, filter_value in col_filters.items():
+                # TODO: Determine proper logic for handling the filters
+                # so that we are not iterating more than we need to.
+                #print(f'    {filter_key}: {filter_value}')
+                pass
+            #print('}')
+
+        print(filters_to_apply)
+
+    def test_filter_data(self):
+        filters = {
+                'amount': {
+                    'less_than': 2500,
+                    'more_than': 2000,
+                },
+                'id': {
+                    'equals': 42,
+                },
+                'date': {
+                    'before': '2020-02-14',
+                }
+            }
+        self.filter_data(filters)

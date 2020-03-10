@@ -153,6 +153,8 @@ Error: search_more ({self.args.search_more}) must be greater than 0''')
         self.display() again.'''
         if self.args.mode == 'list':
             self.display()
+            # TODO: Remove below line! Only for testing!
+            self.reader.test_filter_data()
         elif self.args.mode == 'edit':
             self.edit()
             self.display()
