@@ -1,6 +1,6 @@
-import arguments
-import configuration
-import data
+from suppylement import arguments
+from suppylement import configuration
+from suppylement import data
 
 import sys
 
