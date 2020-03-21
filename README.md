@@ -50,29 +50,27 @@ git clone https://github.com/ncdulo/suppylement.git
 cd suppylement
 
 # Create a new virtual environment and enable it
-python -m venv .env
-source .env/bin/activate
+# Requires virtualenvwrapper. Substitute with your own flavor
+# of virtual environment, if desired
+mkvirtualenv suppylement
+workon suppylement
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Ensure script is executable
-chmod +x bin/suppylement
+# Install to user site-packages
+pip install .
 
 # Create blank data file
 cp data/blank.csv data/data.csv
 
-# To run via wrapper (recommended)
-bin/suppylement --help
-
+# To run via setuptools executable (recommended)
+suppylement --help
 # To run directly
 python suppylement/main.py --help
 
 # If using virtual environment, to disable it when finished run:
 deactivate
 
-# Link the executable to `/usr/local/bin` so that it's available in `$PATH`
-sudo ln -sf /path/to/repo/bin/suppylement /usr/local/bin/suppylement
+# Link the executable to `~/.local/bin` so that it's available in `$PATH`
+ln -s /path/to/virtual_environment/bin/suppylement /home/user_path/.local/bin/suppylement
 ```
 
 Usage
